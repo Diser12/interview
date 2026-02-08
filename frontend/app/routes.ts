@@ -5,4 +5,7 @@ export default [
         index("routes/home.tsx"),
         route("about", "routes/about.tsx")
     ]),
+    layout("layouts/forecast.tsx", [
+        route("forecast/:locationId", "routes/forecast.tsx")
+    ])
 ] satisfies RouteConfig;

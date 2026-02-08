@@ -17,12 +17,17 @@ type Pages = {
   "/about": {
     params: {};
   };
+  "/forecast/:locationId": {
+    params: {
+      "locationId": string;
+    };
+  };
 };
 
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/about";
+    page: "/" | "/about" | "/forecast/:locationId";
   };
   "layouts/default.tsx": {
     id: "layouts/default";
@@ -36,6 +41,14 @@ type RouteFiles = {
     id: "routes/about";
     page: "/about";
   };
+  "layouts/forecast.tsx": {
+    id: "layouts/forecast";
+    page: "/forecast/:locationId";
+  };
+  "routes/forecast.tsx": {
+    id: "routes/forecast";
+    page: "/forecast/:locationId";
+  };
 };
 
 type RouteModules = {
@@ -43,4 +56,6 @@ type RouteModules = {
   "layouts/default": typeof import("./app/layouts/default.tsx");
   "routes/home": typeof import("./app/routes/home.tsx");
   "routes/about": typeof import("./app/routes/about.tsx");
+  "layouts/forecast": typeof import("./app/layouts/forecast.tsx");
+  "routes/forecast": typeof import("./app/routes/forecast.tsx");
 };

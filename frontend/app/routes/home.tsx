@@ -1,20 +1,17 @@
-import { Link } from "react-router";
+import SearchBar from "~/components/search/search-bar";
 
 export default function Home() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <h2>Welcome to the interview app!</h2>
-                <p>
-                    Edit <code>app/root.tsx</code> and save to reload.
+        <div>
+            <header className="text-center">
+                <h2 className="text-2xl font-bold">Weather Forecast App (powered by AccuWeather)</h2>
+                <p className="mt-2">
+                    Search for a location using the search bar below.
                 </p>
-
-                <ul>
-                    <li>Fetch Data from a public API <Link to="https://github.com/toddmotto/public-apis" className="text-blue-500 underline hover:text-blue-600">Samples</Link></li>
-                    <li>Display data from API onto your page (Table, List, etc.)</li>
-                    <li>Apply a styling solution of your choice to make your page look different (CSS, SASS, CSS-in-JS)</li> 
-                </ul>   
             </header>
+            <main className="mt-8">
+                <SearchBar />
+            </main>
         </div>
     );
 }

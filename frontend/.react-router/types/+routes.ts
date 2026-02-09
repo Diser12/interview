@@ -14,9 +14,6 @@ type Pages = {
   "/": {
     params: {};
   };
-  "/about": {
-    params: {};
-  };
   "/forecast/:locationId": {
     params: {
       "locationId": string;
@@ -27,23 +24,15 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/about" | "/forecast/:locationId";
+    page: "/" | "/forecast/:locationId";
   };
   "layouts/default.tsx": {
     id: "layouts/default";
-    page: "/" | "/about";
+    page: "/" | "/forecast/:locationId";
   };
   "routes/home.tsx": {
     id: "routes/home";
     page: "/";
-  };
-  "routes/about.tsx": {
-    id: "routes/about";
-    page: "/about";
-  };
-  "layouts/forecast.tsx": {
-    id: "layouts/forecast";
-    page: "/forecast/:locationId";
   };
   "routes/forecast.tsx": {
     id: "routes/forecast";
@@ -55,7 +44,5 @@ type RouteModules = {
   "root": typeof import("./app/root.tsx");
   "layouts/default": typeof import("./app/layouts/default.tsx");
   "routes/home": typeof import("./app/routes/home.tsx");
-  "routes/about": typeof import("./app/routes/about.tsx");
-  "layouts/forecast": typeof import("./app/layouts/forecast.tsx");
   "routes/forecast": typeof import("./app/routes/forecast.tsx");
 };

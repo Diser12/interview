@@ -1,19 +1,19 @@
 import { useDebounce } from "@uidotdev/usehooks";
-import React from "react";
+import { useEffect, useState } from "react";
 import { getLocations } from "~/api";
 import type { SearchResultLocation } from "~/types/search";
 import SearchResult from "./search-result";
 
 export default function SearchBar() {
-    const [searchTerm, setSearchTerm] = React.useState("");
-    const [searchResults, setSearchResults] = React.useState([] as SearchResultLocation[]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchResults, setSearchResults] = useState([] as SearchResultLocation[]);
     const debouncedSearchTerm = useDebounce(searchTerm, 250);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         const fetchSearchResults = async () => {
             try {
                 if (debouncedSearchTerm.trim()) {

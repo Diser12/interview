@@ -43,7 +43,7 @@ export default function SearchBar() {
                 onChange={handleInputChange}
             />
             {searchResults.length > 0 && searchResults.map((location) => {
-                return <SearchResult location={location} key={location.Key} />;
+                return <SearchResult key={location.Key} location={location} />;
             })}
         </div>
     );

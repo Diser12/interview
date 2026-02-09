@@ -8,7 +8,7 @@ export default function SearchHistory() {
         <div>
             <h2 className="text-lg font-semibold mb-2">Search History</h2>
             { searchHistory.length ? searchHistory.map((location) => {
-                return <SearchResult location={location} key={location.Key} />;
+                return <SearchResult key={location.Key} location={location} />;
             }) : <p className="text-gray-500">No search history yet.</p>}
         </div>
     )

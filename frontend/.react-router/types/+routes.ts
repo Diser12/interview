@@ -26,10 +26,6 @@ type RouteFiles = {
     id: "root";
     page: "/" | "/forecast/:locationId";
   };
-  "layouts/default.tsx": {
-    id: "layouts/default";
-    page: "/" | "/forecast/:locationId";
-  };
   "routes/home.tsx": {
     id: "routes/home";
     page: "/";
@@ -42,7 +38,6 @@ type RouteFiles = {
 
 type RouteModules = {
   "root": typeof import("./app/root.tsx");
-  "layouts/default": typeof import("./app/layouts/default.tsx");
   "routes/home": typeof import("./app/routes/home.tsx");
   "routes/forecast": typeof import("./app/routes/forecast.tsx");
 };

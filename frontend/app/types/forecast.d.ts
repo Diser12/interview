@@ -61,7 +61,6 @@ export interface DailyForecast {
     Moon: {
         Rise: string;
         Set: string;
-        Phase: string;
     };
 }
 

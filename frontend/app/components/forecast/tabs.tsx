@@ -28,7 +28,7 @@ function TabTrigger({ value, children }: { value: TabType; children: React.React
     };
 
     return (
-        <button onClick={handleClick} className={activeTabValue === value ? "bg-blue-500 text-white" : "bg-gray-200"}>
+        <button onClick={handleClick} className={`px-4 py-2 bg-gray-100 rounded-t-md border-t border-l border-r border-gray-300 ${activeTabValue === value ? "border-b border-b-white bg-white mb-[-1px]" : ""}`}>
             {children}
         </button>
     );
@@ -37,26 +37,28 @@ function TabTrigger({ value, children }: { value: TabType; children: React.React
 function TabContent({ value, children }: { value: TabType; children: React.ReactNode }) {
     const { activeTabValue } = useContext(tabContext);
 
-    return activeTabValue === value ? <>{children}</> : null;
+    return activeTabValue === value ? <div className="pt-8 px-8">{children}</div> : null;
 }
 
 export default function Tabs({ locationId }: { locationId: string }) {
     return (
         <TabProvider>
-            <div className="flex space-x-4 mb-4">
-                <TabTrigger value="CURRENT">Current Conditions</TabTrigger>
-                <TabTrigger value="HOURLY">Hourly Forecast</TabTrigger>
-                <TabTrigger value="DAILY">Daily Forecast</TabTrigger>
+            <div className="flex flex-col divide-y divide-gray-300">
+                <div className="flex space-x-8 px-8">
+                    <TabTrigger value="CURRENT">Current Conditions</TabTrigger>
+                    <TabTrigger value="HOURLY">Hourly Forecast</TabTrigger>
+                    <TabTrigger value="DAILY">Daily Forecast</TabTrigger>
+                </div>
+                <TabContent value="CURRENT">
+                    <Current locationId={locationId} />
+                </TabContent>
+                <TabContent value="HOURLY">
+                    <Hourly locationId={locationId} />
+                </TabContent>
+                <TabContent value="DAILY">
+                    <Daily locationId={locationId} />
+                </TabContent>
             </div>
-            <TabContent value="CURRENT">
-                <Current locationId={locationId} />
-            </TabContent>
-            <TabContent value="HOURLY">
-                <Hourly locationId={locationId} />
-            </TabContent>
-            <TabContent value="DAILY">
-                <Daily locationId={locationId} />
-            </TabContent>
         </TabProvider>
     );
 }

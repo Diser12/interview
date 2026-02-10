@@ -20,7 +20,7 @@ export default function App() {
 
     return (
         <>
-            <div className="relative flex h-16 justify-between items-center px-8 border-b border-gray-300 overflow-visible z-10">
+            <div className="sticky top-0 bg-white flex h-16 justify-between items-center px-8 border-b border-gray-300 overflow-visible z-10">
                 <Link to="/" className="font-bold text-xl">
                     Weather Forecast App
                 </Link>
@@ -38,13 +38,13 @@ export default function App() {
                     </button>
                 </div>
             </div>
-            <div className="relative h-[calc(100vh-4rem)] bg-gray-100">
+            <div className="relative min-h-[calc(100vh-4rem)] bg-gray-100">
                 <Outlet />
                 <div
                     className={`absolute top-0 w-full h-full z-10 bg-gray-500/75 transition-opacity duration-300 ${searchHistoryVisibility ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
                     onClick={toggleSearchHistory}
                 />
-                <div className={`absolute top-0 right-0 w-1/3 z-20 bg-white h-full overflow-y-auto transition-transform duration-300 ease-in-out ${searchHistoryVisibility ? 'translate-x-0' : 'translate-x-full'}`}>
+                <div className={`fixed top-16 right-0 bottom-0 w-1/3 z-20 bg-white h-100vh overflow-y-scroll transition-transform duration-300 ease-in-out ${searchHistoryVisibility ? 'translate-x-0' : 'translate-x-full'}`}>
                     <SearchHistory />
                 </div>
             </div>

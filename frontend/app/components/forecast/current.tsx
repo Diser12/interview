@@ -33,13 +33,13 @@ export default function Current({ locationId }: { locationId: string }) {
                         <div className="w-1/2 flex flex-col space-y-2">
                             <div className="flex space-x-4 items-center">
                                 <img src={getWeatherIconUrl(currentConditions.WeatherIcon)} />
-                                <div className="font-bold text-4xl">
+                                <div className="font-bold text-5xl">
                                     {currentConditions.Temperature.Imperial.Value}° {currentConditions.Temperature.Imperial.Unit}
                                 </div>
                             </div>
-                            <p>{currentConditions.WeatherText}</p>
+                            <p className="text-lg">{currentConditions.WeatherText}</p>
                         </div>
-                        <div className="w-1/4 flex flex-col space-y-4">
+                        <div className="w-1/2 flex flex-col justify-evenly divide-y divide-gray-300 border border-gray-300 rounded-md">
                             <KeyValueItem label={'Wind'} value={`${currentConditions.Wind.Direction.Localized} ${currentConditions.Wind.Speed.Imperial.Value} ${currentConditions.Wind.Speed.Imperial.Unit}`} />
                             <KeyValueItem label={'UV Index'} value={`${currentConditions.UVIndex} (${currentConditions.UVIndexText})`} />
                             <KeyValueItem label={'Dew Point'} value={`${currentConditions.DewPoint.Imperial.Value}° ${currentConditions.DewPoint.Imperial.Unit}`} />

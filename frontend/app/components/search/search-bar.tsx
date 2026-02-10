@@ -14,6 +14,11 @@ export default function SearchBar({ size = 'large' }: { size?: 'small' | 'large'
         setSearchTerm(e.target.value);
     };
 
+    const handleResultClick = () => {
+        setSearchTerm('');
+        setSearchResults([]);
+    };
+
     useEffect(() => {
         const fetchSearchResults = async () => {
             try {
@@ -55,7 +60,7 @@ export default function SearchBar({ size = 'large' }: { size?: 'small' | 'large'
                 {searchResults.length > 0 && searchResults.map((location, index) => {
                     return (
                         <div className={`border border-gray-300 ${index !== 0 ? 'border-t-0' : ''}`} key={location.Key}>
-                            <SearchResult location={location} size={size} />
+                            <SearchResult location={location} size={size} onSelect={handleResultClick} />
                         </div>
                     );
                 })}

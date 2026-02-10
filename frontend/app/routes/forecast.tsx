@@ -25,15 +25,15 @@ export default function Forecast({ params }: Route.ComponentProps) {
     }, [params.locationId]);
 
     return (
-        <div className="pt-16 w-3/4 mx-auto">
+        <div className="py-16 w-3/4 mx-auto">
             {isLoading ? <p>Loading...</p> : (
                 forecastLocation ? (
-                    <>
-                        <h2 className="text-4xl font-bold mb-4">
+                    <div className="py-8 bg-white rounded-lg border border-gray-300">
+                        <h2 className="text-4xl font-bold mx-8 mb-4">
                             {`${forecastLocation.LocalizedName}, ${forecastLocation.AdministrativeArea.LocalizedName}`}
                         </h2>
                         <Tabs locationId={params.locationId} />
-                    </>
+                    </div>
                 ) : null
             )} 
         </div>

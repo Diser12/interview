@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router";
 import SearchBar from "~/components/search/search-bar";
 import SearchHistory from "~/components/search/search-history";
+import 'material-icons/iconfont/material-icons.css';
 import './index.css';
 
 export default function App() {
@@ -19,23 +20,31 @@ export default function App() {
 
     return (
         <>
-            <div className="flex h-16 justify-between items-center px-8 bg-gray-100">
+            <div className="relative flex h-16 justify-between items-center px-8 border-b border-gray-300 overflow-visible z-10">
                 <Link to="/" className="font-bold text-xl">
                     Weather Forecast App
                 </Link>
-                {currentLocation.pathname !== '/' && <SearchBar />}
+                {currentLocation.pathname !== '/' && (
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-1/3">
+                        <SearchBar size="small" />
+                    </div>
+                )}
                 <div>
-                    <button onClick={toggleSearchHistory} className="px-4 py-2 bg-gray-300 rounded-md">
-                        Toggle Search History
+                    <button onClick={toggleSearchHistory} className="p-2 border border-gray-300 rounded-md h-[42px] cursor-pointer">
+                        {searchHistoryVisibility ?
+                            <span className="material-icons-outlined text-gray-500">close</span> :
+                            <span className="material-icons-outlined text-gray-500">history</span>
+                        }
                     </button>
                 </div>
             </div>
-            <div className="relative min-h-screen mt-16 w-3/4 mx-auto">
+            <div className="relative h-[calc(100vh-4rem)] bg-gray-100">
                 <Outlet />
                 {searchHistoryVisibility && (
-                    <div className="absolute top-0 right-0">
-                        <SearchHistory />
-                    </div>
+                    <>
+                        <div className="absolute top-0 w-full h-full z-10 bg-gray-500/75" onClick={toggleSearchHistory} />
+                        <div className="absolute top-0 right-0 w-1/3 z-20 bg-white h-full overflow-y-auto"><SearchHistory /></div>
+                    </>
                 )}
             </div>
         </>

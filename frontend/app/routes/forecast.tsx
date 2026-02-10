@@ -25,7 +25,7 @@ export default function Forecast({ params }: Route.ComponentProps) {
     }, [params.locationId]);
 
     return (
-        <div>
+        <div className="pt-16 w-3/4 mx-auto">
             {isLoading ? <p>Loading...</p> : (
                 forecastLocation ? (
                     <>

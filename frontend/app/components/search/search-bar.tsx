@@ -7,6 +7,7 @@ import SearchResult from "./search-result";
 export default function SearchBar({ size = 'large' }: { size?: 'small' | 'large' }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([] as SearchResultLocation[]);
+    const [isSearching, setIsSearching] = useState(false);
     const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,13 +18,16 @@ export default function SearchBar({ size = 'large' }: { size?: 'small' | 'large'
         const fetchSearchResults = async () => {
             try {
                 if (debouncedSearchTerm.trim()) {
-                    const results = (await getLocations(debouncedSearchTerm)).slice(0, 5);
+                    setIsSearching(true);
+                    const results = await getLocations(debouncedSearchTerm);
                     setSearchResults(results);
                 } else {
                     setSearchResults([]);
                 }
             } catch (error) {
                 console.error("Error fetching search results:", error);
+            } finally {
+                setIsSearching(false);
             }
         };
 
@@ -47,7 +51,7 @@ export default function SearchBar({ size = 'large' }: { size?: 'small' | 'large'
                     onChange={handleInputChange}
                 />
             </div>
-            <div className="absolute top-full left-0 right-0 bg-white">
+            {!isSearching && <div className="absolute top-full left-0 right-0 bg-white">
                 {searchResults.length > 0 && searchResults.map((location, index) => {
                     return (
                         <div className={`border border-gray-300 ${index !== 0 ? 'border-t-0' : ''}`} key={location.Key}>
@@ -56,7 +60,7 @@ export default function SearchBar({ size = 'large' }: { size?: 'small' | 'large'
                     );
                 })}
                 {debouncedSearchTerm && searchResults.length === 0 && <p className="p-4 border border-gray-300">No results found.</p>}
-            </div>
+            </div>}
         </div>
     );
 }

@@ -12,7 +12,7 @@ export async function getLocations(query: string): Promise<SearchResultLocation[
         }
     });
 
-    return response.data;
+    return response.data.slice(0, 5);
 }
 
 export async function getForecastLocation(locationKey: string): Promise<ForecastLocation> {

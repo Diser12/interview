@@ -40,12 +40,13 @@ export default function App() {
             </div>
             <div className="relative h-[calc(100vh-4rem)] bg-gray-100">
                 <Outlet />
-                {searchHistoryVisibility && (
-                    <>
-                        <div className="absolute top-0 w-full h-full z-10 bg-gray-500/75" onClick={toggleSearchHistory} />
-                        <div className="absolute top-0 right-0 w-1/3 z-20 bg-white h-full overflow-y-auto"><SearchHistory /></div>
-                    </>
-                )}
+                <div
+                    className={`absolute top-0 w-full h-full z-10 bg-gray-500/75 transition-opacity duration-300 ${searchHistoryVisibility ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+                    onClick={toggleSearchHistory}
+                />
+                <div className={`absolute top-0 right-0 w-1/3 z-20 bg-white h-full overflow-y-auto transition-transform duration-300 ease-in-out ${searchHistoryVisibility ? 'translate-x-0' : 'translate-x-full'}`}>
+                    <SearchHistory />
+                </div>
             </div>
         </>
     );

@@ -1,24 +1,19 @@
 interface Measurement {
-    Metric: {
-        Value: number;
-        Unit: string;
-    };
-    Imperial: {
-        Value: number;
-        Unit: string;
-    };
+    Value: number;
+    Unit: string;
+}
+
+interface MeasurementFormats {
+    Metric: Measurement;
+    Imperial: Measurement;
 }
 
 interface DailyPeriodData {
     Icon: number;
     IconPhrase: string;
-    ShortPhrase: string | null;
-    LongPhrase: string | null;
-    PrecipitationProbability: number | null;
-    RainProbability: number | null;
-    SnowProbability: number | null;
-    IceProbability: number | null;
-    ThunderstormProbability: number | null;
+    LongPhrase: string;
+    PrecipitationProbability: number;
+    TotalLiquid: Measurement;
     Wind: {
         Direction: {
             Localized: string;
@@ -27,22 +22,28 @@ interface DailyPeriodData {
     };
 }
 
+export interface ForecastLocation {
+    LocalizedName: string;
+    AdministrativeArea: {
+        LocalizedName: string;
+    }
+}
+
 export interface CurrentConditionsForecast {
     WeatherText: string;
     WeatherIcon: number;
-    Temperature: Measurement;
+    Temperature: MeasurementFormats;
     IsDayTime: boolean;
-    DewPoint: Measurement;
+    DewPoint: MeasurementFormats;
     Wind: {
         Direction: {
             Localized: string;
         };
-        Speed: Measurement;
+        Speed: MeasurementFormats;
     };
     UVIndex: number;
     UVIndexText: string;
-    Visibility: Measurement;
-    WindChillTemperature: Measurement;
+    Visibility: MeasurementFormats;
 }
 
 export interface DailyForecast {
@@ -68,7 +69,6 @@ export interface HourlyForecast {
     DateTime: string;
     WeatherIcon: number;
     IconPhrase: string;
-    IsDaylight: boolean;
     Temperature: Measurement;
     Wind: {
         Direction: {
@@ -80,8 +80,5 @@ export interface HourlyForecast {
     UVIndex: number;
     UVIndexText: string;
     PrecipitationProbability: number;
-    RainProbability: number | null;
-    SnowProbability: number | null;
-    IceProbability: number | null;
-    ThunderstormProbability: number | null;
+    Visibility: Measurement;
 }

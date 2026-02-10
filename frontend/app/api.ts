@@ -1,12 +1,22 @@
 import axios from "axios";
 import type { SearchResultLocation } from "./types/search";
-import type { CurrentConditionsForecast, DailyForecast, HourlyForecast } from "./types/forecast";
+import type { CurrentConditionsForecast, DailyForecast, ForecastLocation, HourlyForecast } from "./types/forecast";
 
 const baseUrl = 'https://dataservice.accuweather.com';
 const apiKey = 'zpka_ead7e8e229c14576ac49a391345a93bf_15eca384';
 
 export async function getLocations(query: string): Promise<SearchResultLocation[]> {
     const response = await axios.get(`${baseUrl}/locations/v1/search?q=${query}`, {
+        headers: {
+            'Authorization': `Bearer ${apiKey}`
+        }
+    });
+
+    return response.data;
+}
+
+export async function getForecastLocation(locationKey: string): Promise<ForecastLocation> {
+    const response = await axios.get(`${baseUrl}/locations/v1/${locationKey}`, {
         headers: {
             'Authorization': `Bearer ${apiKey}`
         }

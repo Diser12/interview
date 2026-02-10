@@ -45,6 +45,7 @@ export default function SearchBar() {
             {searchResults.length > 0 && searchResults.map((location) => {
                 return <SearchResult key={location.Key} location={location} />;
             })}
+            {debouncedSearchTerm && searchResults.length === 0 && <p className="text-gray-500 mt-2">No results found.</p>}
         </div>
     );
 }

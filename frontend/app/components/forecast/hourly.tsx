@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import { getHourlyForecast } from "~/api";
+import type { HourlyForecast } from "~/types/forecast";
+import Drawer from "../layout/drawer";
+import { formatTime, getWeatherIconUrl } from "~/utils/forecast";
+import KeyValueItem from "../layout/key-value-item";
 
 export default function Hourly({ locationId }: { locationId: string }) {
-    const [hourlyForecast, setHourlyForecast] = useState('');
-        const [isLoading, setIsLoading] = useState(false);
+    const [hourlyForecast, setHourlyForecast] = useState<HourlyForecast[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
         
     useEffect(() => {
         const fetchHourlyForecast = async () => {
             try {
                 setIsLoading(true);
                 const result = await getHourlyForecast(locationId);
-                setHourlyForecast(JSON.stringify(result));
+                setHourlyForecast(result);
             } catch (error) {
                 console.error("Error fetching hourly forecast:", error);
             } finally {
@@ -23,7 +27,37 @@ export default function Hourly({ locationId }: { locationId: string }) {
 
     return (
         <div>
-            {isLoading ? <p>Loading...</p> : <pre>{hourlyForecast}</pre>}
+            {isLoading ? <p>Loading...</p> : 
+            (
+                hourlyForecast.length ? (
+                    hourlyForecast.map((hour, index) => (
+                        <Drawer
+                            key={index}
+                            main={
+                                <div className="flex items-center justify-between">
+                                    <div className="flex flex-col space-y-2">
+                                        <div className="flex items-center space-x-4">
+                                            <div className="font-bold text-lg">{formatTime(hour.DateTime)}</div>
+                                            <img src={getWeatherIconUrl(hour.WeatherIcon)} />
+                                            <div className="font-bold text-3xl">{hour.Temperature.Value}° {hour.Temperature.Unit}</div>
+                                        </div>
+                                        <p>{hour.IconPhrase}</p>
+                                    </div>
+                                    <div className="text-sm">{hour.PrecipitationProbability}%</div>
+                                </div>
+                            }
+                            expandedContent={
+                                <div className="w-1/4 flex flex-col space-y-4">
+                                    <KeyValueItem label="Wind" value={`${hour.Wind.Direction.Localized} ${hour.Wind.Speed.Value} ${hour.Wind.Speed.Unit}`} />
+                                    <KeyValueItem label="UV Index" value={`${hour.UVIndex} (${hour.UVIndexText})`} />
+                                    <KeyValueItem label="Dew Point" value={`${hour.DewPoint.Value}° ${hour.DewPoint.Unit}`} />
+                                    <KeyValueItem label="Visibility" value={`${hour.Visibility.Value} ${hour.Visibility.Unit}`} />
+                                </div>
+                            }
+                        />
+                    ))
+                ) : <p>No data available.</p>
+            )}
         </div>
     );
 }

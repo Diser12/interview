@@ -30,7 +30,7 @@ export default function App() {
                     </button>
                 </div>
             </div>
-            <div className="relative min-h-screen mt-16 mx-8">
+            <div className="relative min-h-screen mt-16 w-3/4 mx-auto">
                 <Outlet />
                 {searchHistoryVisibility && (
                     <div className="absolute top-0 right-0">

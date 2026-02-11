@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import { render, screen } from "@testing-library/react";
 import Daily from "~/components/forecast/daily";
 import { getDailyForecast } from "~/api";
-import { render, screen, waitFor } from "@testing-library/react";
 import type { DailyForecast } from "~/types/forecast";
 
 vi.mock("~/api");
@@ -49,7 +49,7 @@ describe("Daily Component", () => {
 
   it("should render loading state correctly", () => {
     vi.mocked(getDailyForecast).mockImplementation(() => new Promise(() => {}));
-    
+
     const { container } = render(<Daily locationId="12345" />);
     expect(container).toMatchSnapshot();
   });

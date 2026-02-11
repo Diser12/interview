@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { render } from "@testing-library/react";
 import KeyValueItem from "~/components/layout/key-value-item";
+import { render } from "@testing-library/react";
 
 describe("KeyValueItem Component", () => {
   it("should render correctly", () => {

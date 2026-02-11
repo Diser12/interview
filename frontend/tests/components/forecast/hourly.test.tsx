@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { getHourlyForecast } from "~/api";
 import Hourly from "~/components/forecast/hourly";
 import type { HourlyForecast } from "~/types/forecast";
@@ -48,7 +48,7 @@ describe("Hourly Component", () => {
 
   it("should render loading state correctly", () => {
     vi.mocked(getHourlyForecast).mockImplementation(() => new Promise(() => {}));
-    
+
     const { container } = render(<Hourly locationId="12345" />);
     expect(container).toMatchSnapshot();
   });

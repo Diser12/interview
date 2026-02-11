@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Current from "~/components/forecast/current";
 import { getCurrentConditions } from "~/api";
 import type { CurrentConditionsForecast } from "~/types/forecast";
@@ -39,7 +39,7 @@ describe("Current Component", () => {
 
   it("should render loading state correctly", () => {
     vi.mocked(getCurrentConditions).mockImplementation(() => new Promise(() => {}));
-    
+
     const { container } = render(<Current locationId="12345" />);
     expect(container).toMatchSnapshot();
   });

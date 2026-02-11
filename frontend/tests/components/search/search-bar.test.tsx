@@ -1,10 +1,10 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import { MemoryRouter } from "react-router";
-import SearchBar from "~/components/search/search-bar";
 import * as api from "~/api";
 import * as hooks from "@uidotdev/usehooks";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
+import SearchBar from "~/components/search/search-bar";
+import "@testing-library/jest-dom";
 
 vi.mock("~/api");
 vi.mock("@uidotdev/usehooks");

@@ -20,6 +20,7 @@ export default function App() {
 
     return (
         <Fragment>
+            <title>Weather Forecast App</title>
             <div className="sticky top-0 bg-white flex h-16 justify-between items-center px-8 border-b border-gray-300 overflow-visible z-20">
                 <Link to="/" className="font-bold text-xl">
                     Weather Forecast App

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
+import { render } from "@testing-library/react";
 import SearchResult from "~/components/search/search-result";
 import type { SearchResultLocation } from "~/types/search";
 

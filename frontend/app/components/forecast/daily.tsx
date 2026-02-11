@@ -1,9 +1,9 @@
-import { Fragment, useEffect, useState } from "react";
-import { getDailyForecast } from "~/api";
-import type { CelestialData, DailyForecast, DailyPeriodData, Measurement } from "~/types/forecast";
-import Drawer from "../layout/drawer";
 import { formatDate, formatTime, getWeatherIconUrl } from "~/utils/forecast";
+import { Fragment, useEffect, useState } from "react";
+import Drawer from "../layout/drawer";
+import { getDailyForecast } from "~/api";
 import KeyValueItem from "../layout/key-value-item";
+import type { CelestialData, DailyForecast, DailyPeriodData, Measurement } from "~/types/forecast";
 
 function DailyDrawer({ date, periodData, temperature, celestialData }: { date: string; periodData: DailyPeriodData; temperature: Measurement; celestialData: CelestialData }) {
     return (

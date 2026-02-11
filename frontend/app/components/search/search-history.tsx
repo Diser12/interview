@@ -1,6 +1,6 @@
+import SearchResult from "./search-result";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import type { SearchResultLocation } from "~/types/search";
-import SearchResult from "./search-result";
 
 export default function SearchHistory() {
     const [searchHistory, setSearchHistory] = useLocalStorage<SearchResultLocation[]>('searchHistory', []);

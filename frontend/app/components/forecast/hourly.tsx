@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { getHourlyForecast } from "~/api";
-import type { HourlyForecast } from "~/types/forecast";
-import Drawer from "../layout/drawer";
 import { formatTime, getWeatherIconUrl } from "~/utils/forecast";
+import { useEffect, useState } from "react";
+import Drawer from "../layout/drawer";
+import { getHourlyForecast } from "~/api";
 import KeyValueItem from "../layout/key-value-item";
+import type { HourlyForecast } from "~/types/forecast";
 
 export default function Hourly({ locationId }: { locationId: string }) {
     const [hourlyForecast, setHourlyForecast] = useState<HourlyForecast[]>([]);

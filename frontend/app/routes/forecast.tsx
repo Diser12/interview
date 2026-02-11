@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import type { Route } from "./+types/forecast";
+import { getForecastLocation } from "~/api";
 import Tabs from "~/components/forecast/tabs";
 import type { ForecastLocation } from "~/types/forecast";
-import { getForecastLocation } from "~/api";
+import type { Route } from "./+types/forecast";
 
 export default function Forecast({ params }: Route.ComponentProps) {
     const [forecastLocation, setForecastLocation] = useState<ForecastLocation | null>(null);

@@ -1,8 +1,8 @@
-import { useDebounce } from "@uidotdev/usehooks";
 import { useCallback, useEffect, useState } from "react";
 import { getLocations } from "~/api";
-import type { SearchResultLocation } from "~/types/search";
 import SearchResult from "./search-result";
+import { useDebounce } from "@uidotdev/usehooks";
+import type { SearchResultLocation } from "~/types/search";
 
 export default function SearchBar({ size = 'large' }: { size?: 'small' | 'large' }) {
     const [searchTerm, setSearchTerm] = useState('');

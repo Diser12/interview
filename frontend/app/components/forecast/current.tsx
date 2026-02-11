@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getCurrentConditions } from "~/api";
-import type { CurrentConditionsForecast } from "~/types/forecast";
 import { getWeatherIconUrl } from "~/utils/forecast";
 import KeyValueItem from "../layout/key-value-item";
+import type { CurrentConditionsForecast } from "~/types/forecast";
 
 export default function Current({ locationId }: { locationId: string }) {
     const [currentConditions, setCurrentConditions] = useState<CurrentConditionsForecast | null>(null);

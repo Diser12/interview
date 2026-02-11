@@ -1,5 +1,5 @@
-import { useLocalStorage } from "@uidotdev/usehooks";
 import { NavLink } from "react-router";
+import { useLocalStorage } from "@uidotdev/usehooks";
 import type { SearchResultLocation } from "~/types/search";
 
 export default function SearchResult({ location, size = 'large', onSelect = () => {} }: { location: SearchResultLocation, size?: 'small' | 'large', onSelect?: () => void }) {

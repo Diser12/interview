@@ -38,7 +38,6 @@ export interface CurrentConditionsForecast {
     WeatherText: string;
     WeatherIcon: number;
     Temperature: MeasurementFormats;
-    IsDayTime: boolean;
     DewPoint: MeasurementFormats;
     Wind: {
         Direction: {

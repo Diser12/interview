@@ -5,13 +5,13 @@ import { getDailyForecast } from "~/api";
 import KeyValueItem from "../layout/key-value-item";
 import type { CelestialData, DailyForecast, DailyPeriodData, Measurement } from "~/types/forecast";
 
-function DailyDrawer({ date, periodData, temperature, celestialData }: { date: string; periodData: DailyPeriodData; temperature: Measurement; celestialData: CelestialData }) {
+function DailyDrawer({ date, timeOfDay, periodData, temperature, celestialData }: { date: string; timeOfDay: string; periodData: DailyPeriodData; temperature: Measurement; celestialData: CelestialData }) {
     return (
         <Drawer
             main={
                 <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
-                        <div className="font-bold text-lg">{formatDate(date)} (Day)</div>
+                        <div className="font-bold text-lg">{formatDate(date)} ({timeOfDay})</div>
                         <img src={getWeatherIconUrl(periodData.Icon)} />
                         <div className="font-bold text-3xl">{temperature.Value}° {temperature.Unit}</div>
                     </div>
@@ -43,12 +43,12 @@ export default function Daily({ locationId }: { locationId: string }) {
     useEffect(() => {
         const fetchDailyForecast = async () => {
             try {
+                setHasError(false);
                 setIsLoading(true);
                 const result = await getDailyForecast(locationId);
                 setDailyForecast(result);
             } catch (error) {
                 setHasError(true);
-                console.error("Error fetching daily forecast:", error);
             } finally {
                 setIsLoading(false);
             }
@@ -65,8 +65,8 @@ export default function Daily({ locationId }: { locationId: string }) {
                     <div className="flex flex-col space-y-4">
                         {dailyForecast.map((day, index) => (
                             <Fragment key={`${index}`}>
-                                <DailyDrawer date={day.Date} periodData={day.Day} temperature={day.Temperature.Maximum} celestialData={day.Sun} />
-                                <DailyDrawer date={day.Date} periodData={day.Night} temperature={day.Temperature.Minimum} celestialData={day.Moon} />
+                                <DailyDrawer date={day.Date} timeOfDay="Day" periodData={day.Day} temperature={day.Temperature.Maximum} celestialData={day.Sun} />
+                                <DailyDrawer date={day.Date} timeOfDay="Night" periodData={day.Night} temperature={day.Temperature.Minimum} celestialData={day.Moon} />
                             </Fragment>
                         ))}
                     </div>

@@ -7,15 +7,17 @@ import type { Route } from "./+types/forecast";
 export default function Forecast({ params }: Route.ComponentProps) {
     const [forecastLocation, setForecastLocation] = useState<ForecastLocation | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
 
     useEffect(() => {
         const fetchForecastLocation = async () => {
             try {
+                setHasError(false);
                 setIsLoading(true);
                 const result = await getForecastLocation(params.locationId);
                 setForecastLocation(result);
             } catch (error) {
-                console.error("Error fetching forecast location:", error);
+                setHasError(true);
             } finally {
                 setIsLoading(false);
             }
@@ -34,7 +36,7 @@ export default function Forecast({ params }: Route.ComponentProps) {
                         </h2>
                         <Tabs locationId={params.locationId} />
                     </div>
-                ) : null
+                ) : hasError ? <p>Error loading forecast data. Please try again later.</p> : null
             )} 
         </div>
     );

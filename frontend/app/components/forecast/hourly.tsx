@@ -13,12 +13,12 @@ export default function Hourly({ locationId }: { locationId: string }) {
     useEffect(() => {
         const fetchHourlyForecast = async () => {
             try {
+                setHasError(false);
                 setIsLoading(true);
                 const result = await getHourlyForecast(locationId);
                 setHourlyForecast(result);
             } catch (error) {
                 setHasError(true);
-                console.error("Error fetching hourly forecast:", error);
             } finally {
                 setIsLoading(false);
             }

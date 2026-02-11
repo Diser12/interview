@@ -30,7 +30,7 @@ export default function SearchBar({ size = 'large' }: { size?: 'small' | 'large'
                     setSearchResults([]);
                 }
             } catch (error) {
-                console.error("Error fetching search results:", error);
+                setSearchResults([]);
             } finally {
                 setIsSearching(false);
             }

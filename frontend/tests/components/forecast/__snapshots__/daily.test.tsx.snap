@@ -1,0 +1,144 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Daily Component > should render daily forecast data correctly 1`] = `
+<div>
+  <div>
+    <div
+      class="flex flex-col space-y-4"
+    >
+      <div
+        class="p-4 border border-gray-300 rounded-md cursor-pointer"
+      >
+        <div
+          class="flex space-x-2 items-center"
+        >
+          <div
+            class="flex-1"
+          >
+            <div
+              class="flex items-center justify-between"
+            >
+              <div
+                class="flex items-center space-x-4"
+              >
+                <div
+                  class="font-bold text-lg"
+                >
+                  Mon, 2/12
+                   (
+                  Day
+                  )
+                </div>
+                <img
+                  src="https://www.accuweather.com/assets/images/weather-icons/v2a/1.svg"
+                />
+                <div
+                  class="font-bold text-3xl"
+                >
+                  75
+                  ° 
+                  F
+                </div>
+              </div>
+              <div
+                class="text-sm flex items-center space-x-1"
+              >
+                <span
+                  class="material-icons-outlined text-gray-500"
+                >
+                  water_drop
+                </span>
+                <span>
+                  10
+                  %
+                </span>
+              </div>
+            </div>
+          </div>
+          <span
+            class="material-icons-outlined text-gray-500"
+          >
+            expand_more
+          </span>
+        </div>
+      </div>
+      <div
+        class="p-4 border border-gray-300 rounded-md cursor-pointer"
+      >
+        <div
+          class="flex space-x-2 items-center"
+        >
+          <div
+            class="flex-1"
+          >
+            <div
+              class="flex items-center justify-between"
+            >
+              <div
+                class="flex items-center space-x-4"
+              >
+                <div
+                  class="font-bold text-lg"
+                >
+                  Mon, 2/12
+                   (
+                  Night
+                  )
+                </div>
+                <img
+                  src="https://www.accuweather.com/assets/images/weather-icons/v2a/33.svg"
+                />
+                <div
+                  class="font-bold text-3xl"
+                >
+                  55
+                  ° 
+                  F
+                </div>
+              </div>
+              <div
+                class="text-sm flex items-center space-x-1"
+              >
+                <span
+                  class="material-icons-outlined text-gray-500"
+                >
+                  water_drop
+                </span>
+                <span>
+                  5
+                  %
+                </span>
+              </div>
+            </div>
+          </div>
+          <span
+            class="material-icons-outlined text-gray-500"
+          >
+            expand_more
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Daily Component > should render error state correctly 1`] = `
+<div>
+  <div>
+    <p>
+      Error loading forecast data. Please try again later.
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Daily Component > should render loading state correctly 1`] = `
+<div>
+  <div>
+    <p>
+      Loading...
+    </p>
+  </div>
+</div>
+`;

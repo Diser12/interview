@@ -12,12 +12,12 @@ export default function Current({ locationId }: { locationId: string }) {
     useEffect(() => {
         const fetchCurrentConditions = async () => {
             try {
+                setHasError(false);
                 setIsLoading(true);
                 const result = await getCurrentConditions(locationId);
                 setCurrentConditions(result);
             } catch (error) {
                 setHasError(true);
-                console.error("Error fetching current conditions:", error);
             } finally {
                 setIsLoading(false);
             }
@@ -49,7 +49,7 @@ export default function Current({ locationId }: { locationId: string }) {
                         </div>
                     </div>
                 ) : (
-                    hasError ? <p>Error loading current conditions data. Please try again later.</p> : null
+                    hasError ? <p>Error loading forecast data. Please try again later.</p> : null
                 )
             )}
         </div>

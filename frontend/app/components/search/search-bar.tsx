@@ -1,5 +1,5 @@
 import { useDebounce } from "@uidotdev/usehooks";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getLocations } from "~/api";
 import type { SearchResultLocation } from "~/types/search";
 import SearchResult from "./search-result";
@@ -14,10 +14,10 @@ export default function SearchBar({ size = 'large' }: { size?: 'small' | 'large'
         setSearchTerm(e.target.value);
     };
 
-    const handleResultClick = () => {
+    const handleResultClick = useCallback(() => {
         setSearchTerm('');
         setSearchResults([]);
-    };
+    }, []);
 
     useEffect(() => {
         const fetchSearchResults = async () => {

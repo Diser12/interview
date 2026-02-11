@@ -8,6 +8,7 @@ import KeyValueItem from "../layout/key-value-item";
 export default function Hourly({ locationId }: { locationId: string }) {
     const [hourlyForecast, setHourlyForecast] = useState<HourlyForecast[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
         
     useEffect(() => {
         const fetchHourlyForecast = async () => {
@@ -16,6 +17,7 @@ export default function Hourly({ locationId }: { locationId: string }) {
                 const result = await getHourlyForecast(locationId);
                 setHourlyForecast(result);
             } catch (error) {
+                setHasError(true);
                 console.error("Error fetching hourly forecast:", error);
             } finally {
                 setIsLoading(false);
@@ -60,7 +62,9 @@ export default function Hourly({ locationId }: { locationId: string }) {
                             />
                         ))}
                     </div>
-                ) : <p>No data available.</p>
+                ) : (
+                    hasError ? <p>Error loading forecast data. Please try again later.</p> : null
+                )
             )}
         </div>
     );

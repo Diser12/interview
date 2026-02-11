@@ -1,14 +1,14 @@
-interface Measurement {
+export interface Measurement {
     Value: number;
     Unit: string;
 }
 
-interface MeasurementFormats {
+export interface MeasurementFormats {
     Metric: Measurement;
     Imperial: Measurement;
 }
 
-interface DailyPeriodData {
+export interface DailyPeriodData {
     Icon: number;
     IconPhrase: string;
     LongPhrase: string;
@@ -20,6 +20,11 @@ interface DailyPeriodData {
         };
         Speed: Measurement;
     };
+}
+
+export interface CelestialData {
+    Rise: string;
+    Set: string;
 }
 
 export interface ForecastLocation {
@@ -54,14 +59,8 @@ export interface DailyForecast {
     };
     Day: DailyPeriodData;
     Night: DailyPeriodData;
-    Sun: {
-        Rise: string;
-        Set: string;
-    };
-    Moon: {
-        Rise: string;
-        Set: string;
-    };
+    Sun: CelestialData;
+    Moon: CelestialData;
 }
 
 export interface HourlyForecast {

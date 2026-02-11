@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router";
 import SearchBar from "~/components/search/search-bar";
 import SearchHistory from "~/components/search/search-history";
@@ -16,11 +16,11 @@ export default function App() {
 
     useEffect(() => {
         setSearchHistoryVisibility(false);
-    }, [currentLocation]);
+    }, [currentLocation.pathname]);
 
     return (
-        <>
-            <div className="sticky top-0 bg-white flex h-16 justify-between items-center px-8 border-b border-gray-300 overflow-visible z-10">
+        <Fragment>
+            <div className="sticky top-0 bg-white flex h-16 justify-between items-center px-8 border-b border-gray-300 overflow-visible z-20">
                 <Link to="/" className="font-bold text-xl">
                     Weather Forecast App
                 </Link>
@@ -48,6 +48,6 @@ export default function App() {
                     <SearchHistory />
                 </div>
             </div>
-        </>
+        </Fragment>
     );
 }

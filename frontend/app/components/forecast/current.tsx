@@ -7,6 +7,7 @@ import KeyValueItem from "../layout/key-value-item";
 export default function Current({ locationId }: { locationId: string }) {
     const [currentConditions, setCurrentConditions] = useState<CurrentConditionsForecast | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
         
     useEffect(() => {
         const fetchCurrentConditions = async () => {
@@ -15,6 +16,7 @@ export default function Current({ locationId }: { locationId: string }) {
                 const result = await getCurrentConditions(locationId);
                 setCurrentConditions(result);
             } catch (error) {
+                setHasError(true);
                 console.error("Error fetching current conditions:", error);
             } finally {
                 setIsLoading(false);
@@ -46,7 +48,9 @@ export default function Current({ locationId }: { locationId: string }) {
                             <KeyValueItem label={'Visibility'} value={`${currentConditions.Visibility.Imperial.Value} ${currentConditions.Visibility.Imperial.Unit}`} />
                         </div>
                     </div>
-                ) : <p>No data available.</p>
+                ) : (
+                    hasError ? <p>Error loading current conditions data. Please try again later.</p> : null
+                )
             )}
         </div>
     );

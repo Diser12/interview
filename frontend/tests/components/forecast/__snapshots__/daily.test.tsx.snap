@@ -7,10 +7,10 @@ exports[`Daily Component > should render daily forecast data correctly 1`] = `
       class="flex flex-col space-y-4"
     >
       <div
-        class="p-4 border border-gray-300 rounded-md cursor-pointer"
+        class="md:p-4 p-2 border border-gray-300 rounded-md cursor-pointer"
       >
         <div
-          class="flex space-x-2 items-center"
+          class="flex md:space-x-2 space-x-1 items-center"
         >
           <div
             class="flex-1"
@@ -19,10 +19,10 @@ exports[`Daily Component > should render daily forecast data correctly 1`] = `
               class="flex items-center justify-between"
             >
               <div
-                class="flex items-center space-x-4"
+                class="flex items-center md:space-x-4 space-x-2"
               >
                 <div
-                  class="font-bold text-lg"
+                  class="font-bold md:text-lg"
                 >
                   Mon, 2/12
                    (
@@ -33,7 +33,7 @@ exports[`Daily Component > should render daily forecast data correctly 1`] = `
                   src="https://www.accuweather.com/assets/images/weather-icons/v2a/1.svg"
                 />
                 <div
-                  class="font-bold text-3xl"
+                  class="font-bold md:text-3xl text-xl"
                 >
                   75
                   ° 
@@ -63,10 +63,10 @@ exports[`Daily Component > should render daily forecast data correctly 1`] = `
         </div>
       </div>
       <div
-        class="p-4 border border-gray-300 rounded-md cursor-pointer"
+        class="md:p-4 p-2 border border-gray-300 rounded-md cursor-pointer"
       >
         <div
-          class="flex space-x-2 items-center"
+          class="flex md:space-x-2 space-x-1 items-center"
         >
           <div
             class="flex-1"
@@ -75,10 +75,10 @@ exports[`Daily Component > should render daily forecast data correctly 1`] = `
               class="flex items-center justify-between"
             >
               <div
-                class="flex items-center space-x-4"
+                class="flex items-center md:space-x-4 space-x-2"
               >
                 <div
-                  class="font-bold text-lg"
+                  class="font-bold md:text-lg"
                 >
                   Mon, 2/12
                    (
@@ -89,7 +89,7 @@ exports[`Daily Component > should render daily forecast data correctly 1`] = `
                   src="https://www.accuweather.com/assets/images/weather-icons/v2a/33.svg"
                 />
                 <div
-                  class="font-bold text-3xl"
+                  class="font-bold md:text-3xl text-xl"
                 >
                   55
                   ° 

@@ -3,10 +3,10 @@
 exports[`Drawer Component > should render collapsed state correctly 1`] = `
 <div>
   <div
-    class="p-4 border border-gray-300 rounded-md cursor-pointer"
+    class="md:p-4 p-2 border border-gray-300 rounded-md cursor-pointer"
   >
     <div
-      class="flex space-x-2 items-center"
+      class="flex md:space-x-2 space-x-1 items-center"
     >
       <div
         class="flex-1"
@@ -28,10 +28,10 @@ exports[`Drawer Component > should render collapsed state correctly 1`] = `
 exports[`Drawer Component > should render expanded state correctly 1`] = `
 <div>
   <div
-    class="p-4 border border-gray-300 rounded-md cursor-pointer"
+    class="md:p-4 p-2 border border-gray-300 rounded-md cursor-pointer"
   >
     <div
-      class="flex space-x-2 items-center"
+      class="flex md:space-x-2 space-x-1 items-center"
     >
       <div
         class="flex-1"

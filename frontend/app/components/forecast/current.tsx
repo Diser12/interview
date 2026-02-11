@@ -31,8 +31,8 @@ export default function Current({ locationId }: { locationId: string }) {
             {isLoading ? <p>Loading...</p> :
             (
                 currentConditions ? (
-                    <div className="flex space-between">
-                        <div className="w-1/2 flex flex-col space-y-2">
+                    <div className="flex md:flex-row flex-col md:space-between space-y-4">
+                        <div className="md:w-1/2 w-full flex flex-col space-y-2">
                             <div className="flex space-x-4 items-center">
                                 <img src={getWeatherIconUrl(currentConditions.WeatherIcon)} />
                                 <div className="font-bold text-5xl">
@@ -41,7 +41,7 @@ export default function Current({ locationId }: { locationId: string }) {
                             </div>
                             <p className="text-lg">{currentConditions.WeatherText}</p>
                         </div>
-                        <div className="w-1/2 flex flex-col justify-evenly divide-y divide-gray-300 border border-gray-300 rounded-md">
+                        <div className="md:w-1/2 w-full flex flex-col justify-evenly divide-y divide-gray-300 border border-gray-300 rounded-md">
                             <KeyValueItem label={'Wind'} value={`${currentConditions.Wind.Direction.Localized} ${currentConditions.Wind.Speed.Imperial.Value} ${currentConditions.Wind.Speed.Imperial.Unit}`} />
                             <KeyValueItem label={'UV Index'} value={`${currentConditions.UVIndex} (${currentConditions.UVIndexText})`} />
                             <KeyValueItem label={'Dew Point'} value={`${currentConditions.DewPoint.Imperial.Value}° ${currentConditions.DewPoint.Imperial.Unit}`} />

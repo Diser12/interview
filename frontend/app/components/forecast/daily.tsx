@@ -10,10 +10,10 @@ function DailyDrawer({ date, timeOfDay, periodData, temperature, celestialData }
         <Drawer
             main={
                 <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                        <div className="font-bold text-lg">{formatDate(date)} ({timeOfDay})</div>
+                    <div className="flex items-center md:space-x-4 space-x-2">
+                        <div className="font-bold md:text-lg">{formatDate(date)} ({timeOfDay})</div>
                         <img src={getWeatherIconUrl(periodData.Icon)} />
-                        <div className="font-bold text-3xl">{temperature.Value}° {temperature.Unit}</div>
+                        <div className="font-bold md:text-3xl text-xl">{temperature.Value}° {temperature.Unit}</div>
                     </div>
                     <div className="text-sm flex items-center space-x-1">
                         <span className="material-icons-outlined text-gray-500">water_drop</span><span>{periodData.PrecipitationProbability}%</span>
@@ -22,8 +22,8 @@ function DailyDrawer({ date, timeOfDay, periodData, temperature, celestialData }
             }
             expandedContent={
                 <Fragment>
-                    <p className="mb-4">{periodData.LongPhrase}</p>
-                    <div className="w-1/2 flex flex-col justify-evenly divide-y divide-gray-300">
+                    <p className="md:text-md text-sm mb-4">{periodData.LongPhrase}</p>
+                    <div className="lg:w-1/2 flex flex-col justify-evenly divide-y divide-gray-300">
                         <KeyValueItem label="Total Precipitation" value={`${periodData.TotalLiquid.Value} ${periodData.TotalLiquid.Unit}`} />
                         <KeyValueItem label="Wind" value={`${periodData.Wind.Direction.Localized} ${periodData.Wind.Speed.Value} ${periodData.Wind.Speed.Unit}`} />
                         <KeyValueItem label="Sunrise" value={formatTime(celestialData.Rise, true)} />

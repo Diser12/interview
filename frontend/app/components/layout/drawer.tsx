@@ -8,8 +8,8 @@ export default function Drawer({ main, expandedContent }: { main: React.ReactNod
     }
 
     return (
-        <div className="p-4 border border-gray-300 rounded-md cursor-pointer" onClick={toggleExpanded}>
-            <div className="flex space-x-2 items-center">
+        <div className="md:p-4 p-2 border border-gray-300 rounded-md cursor-pointer" onClick={toggleExpanded}>
+            <div className="flex md:space-x-2 space-x-1 items-center">
                 <div className="flex-1">{main}</div>
                 <span className="material-icons-outlined text-gray-500">{expanded ? 'expand_less' : 'expand_more'}</span>
             </div>

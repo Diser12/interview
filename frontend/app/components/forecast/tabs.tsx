@@ -44,7 +44,7 @@ export default function Tabs({ locationId }: { locationId: string }) {
     return (
         <TabProvider>
             <div className="flex flex-col divide-y divide-gray-300">
-                <div className="flex space-x-8 px-8">
+                <div className="flex md:space-x-8 space-x-4 md:px-8 px-4">
                     <TabTrigger value="CURRENT">Current Conditions</TabTrigger>
                     <TabTrigger value="HOURLY">Hourly Forecast</TabTrigger>
                     <TabTrigger value="DAILY">Daily Forecast</TabTrigger>

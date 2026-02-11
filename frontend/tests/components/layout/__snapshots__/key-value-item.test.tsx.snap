@@ -3,7 +3,7 @@
 exports[`KeyValueItem Component > should render correctly 1`] = `
 <div>
   <div
-    class="flex items-center justify-between p-4"
+    class="flex items-center justify-between md:p-4 p-2"
   >
     <span
       class="font-semibold"

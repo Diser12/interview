@@ -39,11 +39,11 @@ export default function Hourly({ locationId }: { locationId: string }) {
                                 main={
                                     <div className="flex flex-col space-y-2">
                                         <div className="flex items-center justify-between">
-                                            <div className="flex items-center space-x-4">
-                                                <div className="font-bold text-lg">{formatTime(hour.DateTime)}</div>
+                                            <div className="flex items-center md:space-x-4 space-x-2">
+                                                <div className="font-bold md:text-lg">{formatTime(hour.DateTime)}</div>
                                                 <img src={getWeatherIconUrl(hour.WeatherIcon)} />
-                                                <div className="font-bold text-3xl">{hour.Temperature.Value}° {hour.Temperature.Unit}</div>
-                                                <p>{hour.IconPhrase}</p>
+                                                <div className="font-bold md:text-3xl text-xl">{hour.Temperature.Value}° {hour.Temperature.Unit}</div>
+                                                <p className="md:text-md text-sm">{hour.IconPhrase}</p>
                                             </div>
                                             <div className="text-sm flex items-center space-x-1">
                                                 <span className="material-icons-outlined text-gray-500">water_drop</span><span>{hour.PrecipitationProbability}%</span>
@@ -52,7 +52,7 @@ export default function Hourly({ locationId }: { locationId: string }) {
                                     </div>
                                 }
                                 expandedContent={
-                                    <div className="w-1/2 flex flex-col justify-evenly divide-y divide-gray-300">
+                                    <div className="lg:w-1/2 w-full flex flex-col justify-evenly divide-y divide-gray-300">
                                         <KeyValueItem label="Wind" value={`${hour.Wind.Direction.Localized} ${hour.Wind.Speed.Value} ${hour.Wind.Speed.Unit}`} />
                                         <KeyValueItem label="UV Index" value={`${hour.UVIndex} (${hour.UVIndexText})`} />
                                         <KeyValueItem label="Dew Point" value={`${hour.DewPoint.Value}° ${hour.DewPoint.Unit}`} />

@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 import Current from "./current";
 import Daily from "./daily";
 import Hourly from "./hourly";
+import type { ForecastDetails } from "~/types/forecast";
 
 type TabType = 'CURRENT' | 'HOURLY' | 'DAILY';
 
@@ -40,7 +41,7 @@ function TabContent({ value, children }: { value: TabType; children: React.React
     return activeTabValue === value ? <div className="pt-8 px-8">{children}</div> : null;
 }
 
-export default function Tabs({ locationId }: { locationId: string }) {
+export default function Tabs({ forecast }: { forecast: ForecastDetails }) {
     return (
         <TabProvider>
             <div className="flex flex-col divide-y divide-gray-300">
@@ -50,13 +51,13 @@ export default function Tabs({ locationId }: { locationId: string }) {
                     <TabTrigger value="DAILY">Daily Forecast</TabTrigger>
                 </div>
                 <TabContent value="CURRENT">
-                    <Current locationId={locationId} />
+                    <Current data={forecast.current} />
                 </TabContent>
                 <TabContent value="HOURLY">
-                    <Hourly locationId={locationId} />
+                    <Hourly data={forecast.hourly} />
                 </TabContent>
                 <TabContent value="DAILY">
-                    <Daily locationId={locationId} />
+                    <Daily data={forecast.daily} />
                 </TabContent>
             </div>
         </TabProvider>

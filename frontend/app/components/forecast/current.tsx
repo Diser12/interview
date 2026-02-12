@@ -1,57 +1,32 @@
-import { useEffect, useState } from "react";
-import { getCurrentConditions } from "~/api";
+import { Fragment } from "react";
 import { getWeatherIconUrl } from "~/utils/forecast";
 import KeyValueItem from "../layout/key-value-item";
 import type { CurrentConditionsForecast } from "~/types/forecast";
 
-export default function Current({ locationId }: { locationId: string }) {
-    const [currentConditions, setCurrentConditions] = useState<CurrentConditionsForecast | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [hasError, setHasError] = useState(false);
-        
-    useEffect(() => {
-        const fetchCurrentConditions = async () => {
-            try {
-                setHasError(false);
-                setIsLoading(true);
-                const result = await getCurrentConditions(locationId);
-                setCurrentConditions(result);
-            } catch (error) {
-                setHasError(true);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchCurrentConditions();
-    }, [locationId]);
-
+export default function Current({ data }: { data: CurrentConditionsForecast }) {
     return (
-        <div>
-            {isLoading ? <p>Loading...</p> :
-            (
-                currentConditions ? (
+        <Fragment>
+            {
+                data ? (
                     <div className="flex md:flex-row flex-col md:space-between space-y-4">
                         <div className="md:w-1/2 w-full flex flex-col space-y-2">
                             <div className="flex space-x-4 items-center">
-                                <img src={getWeatherIconUrl(currentConditions.WeatherIcon)} />
+                                <img src={getWeatherIconUrl(data.WeatherIcon)} />
                                 <div className="font-bold text-5xl">
-                                    {currentConditions.Temperature.Imperial.Value}° {currentConditions.Temperature.Imperial.Unit}
+                                    {data.Temperature.Imperial.Value}° {data.Temperature.Imperial.Unit}
                                 </div>
                             </div>
-                            <p className="text-lg">{currentConditions.WeatherText}</p>
+                            <p className="text-lg">{data.WeatherText}</p>
                         </div>
                         <div className="md:w-1/2 w-full flex flex-col justify-evenly divide-y divide-gray-300 border border-gray-300 rounded-md">
-                            <KeyValueItem label={'Wind'} value={`${currentConditions.Wind.Direction.Localized} ${currentConditions.Wind.Speed.Imperial.Value} ${currentConditions.Wind.Speed.Imperial.Unit}`} />
-                            <KeyValueItem label={'UV Index'} value={`${currentConditions.UVIndex} (${currentConditions.UVIndexText})`} />
-                            <KeyValueItem label={'Dew Point'} value={`${currentConditions.DewPoint.Imperial.Value}° ${currentConditions.DewPoint.Imperial.Unit}`} />
-                            <KeyValueItem label={'Visibility'} value={`${currentConditions.Visibility.Imperial.Value} ${currentConditions.Visibility.Imperial.Unit}`} />
+                            <KeyValueItem label={'Wind'} value={`${data.Wind.Direction.Localized} ${data.Wind.Speed.Imperial.Value} ${data.Wind.Speed.Imperial.Unit}`} />
+                            <KeyValueItem label={'UV Index'} value={`${data.UVIndex} (${data.UVIndexText})`} />
+                            <KeyValueItem label={'Dew Point'} value={`${data.DewPoint.Imperial.Value}° ${data.DewPoint.Imperial.Unit}`} />
+                            <KeyValueItem label={'Visibility'} value={`${data.Visibility.Imperial.Value} ${data.Visibility.Imperial.Unit}`} />
                         </div>
                     </div>
-                ) : (
-                    hasError ? <p>Error loading forecast data. Please try again later.</p> : null
-                )
-            )}
-        </div>
+                ) : null
+            }
+        </Fragment>
     );
 }

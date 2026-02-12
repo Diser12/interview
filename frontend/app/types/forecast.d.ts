@@ -79,3 +79,9 @@ export interface HourlyForecast {
     PrecipitationProbability: number;
     Visibility: Measurement;
 }
+
+export interface ForecastDetails {
+    current: CurrentConditionsForecast;
+    daily: DailyForecast[];
+    hourly: HourlyForecast[];
+}

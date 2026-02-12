@@ -1,39 +1,16 @@
 import { formatTime, getWeatherIconUrl } from "~/utils/forecast";
-import { useEffect, useState } from "react";
 import Drawer from "../layout/drawer";
-import { getHourlyForecast } from "~/api";
+import { Fragment } from "react";
 import KeyValueItem from "../layout/key-value-item";
 import type { HourlyForecast } from "~/types/forecast";
 
-export default function Hourly({ locationId }: { locationId: string }) {
-    const [hourlyForecast, setHourlyForecast] = useState<HourlyForecast[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [hasError, setHasError] = useState(false);
-        
-    useEffect(() => {
-        const fetchHourlyForecast = async () => {
-            try {
-                setHasError(false);
-                setIsLoading(true);
-                const result = await getHourlyForecast(locationId);
-                setHourlyForecast(result);
-            } catch (error) {
-                setHasError(true);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchHourlyForecast();
-    }, [locationId]);
-
+export default function Hourly({ data }: { data: HourlyForecast[] }) {
     return (
-        <div>
-            {isLoading ? <p>Loading...</p> : 
-            (
-                hourlyForecast.length ? (
+        <Fragment>
+            {
+                data.length ? (
                     <div className="flex flex-col space-y-4">
-                        {hourlyForecast.map((hour, index) => (
+                        {data.map((hour, index) => (
                             <Drawer
                                 key={index}
                                 main={
@@ -62,10 +39,8 @@ export default function Hourly({ locationId }: { locationId: string }) {
                             />
                         ))}
                     </div>
-                ) : (
-                    hasError ? <p>Error loading forecast data. Please try again later.</p> : null
-                )
-            )}
-        </div>
+                ) : null
+            }
+        </Fragment>
     );
 }

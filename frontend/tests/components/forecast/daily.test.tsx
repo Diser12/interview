@@ -1,10 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Daily from "~/components/forecast/daily";
-import { getDailyForecast } from "~/api";
 import type { DailyForecast } from "~/types/forecast";
-
-vi.mock("~/api");
 
 const mockDailyForecast: DailyForecast[] = [
   {
@@ -43,29 +40,8 @@ const mockDailyForecast: DailyForecast[] = [
 
 
 describe("Daily Component", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it("should render loading state correctly", () => {
-    vi.mocked(getDailyForecast).mockImplementation(() => new Promise(() => {}));
-
-    const { container } = render(<Daily locationId="12345" />);
-    expect(container).toMatchSnapshot();
-  });
-
-  it("should render error state correctly", async () => {
-    vi.mocked(getDailyForecast).mockRejectedValue(new Error("API Error"));
-
-    const { container } = render(<Daily locationId="12345" />);
-    await screen.findByText("Error loading forecast data. Please try again later.");
-    expect(container).toMatchSnapshot();
-  });
-
   it("should render daily forecast data correctly", async () => {
-    vi.mocked(getDailyForecast).mockResolvedValue(mockDailyForecast);
-
-    const { container } = render(<Daily locationId="12345" />);
+    const { container } = render(<Daily data={mockDailyForecast} />);
     await screen.findByText("Mon, 2/12 (Day)");
     expect(container).toMatchSnapshot();
   });

@@ -1,7 +1,6 @@
 import { formatDate, formatTime, getWeatherIconUrl } from "~/utils/forecast";
-import { Fragment, useEffect, useState } from "react";
 import Drawer from "../layout/drawer";
-import { getDailyForecast } from "~/api";
+import { Fragment } from "react";
 import KeyValueItem from "../layout/key-value-item";
 import type { CelestialData, DailyForecast, DailyPeriodData, Measurement } from "~/types/forecast";
 
@@ -35,45 +34,21 @@ function DailyDrawer({ date, timeOfDay, periodData, temperature, celestialData }
     )
 }
 
-export default function Daily({ locationId }: { locationId: string }) {
-    const [dailyForecast, setDailyForecast] = useState<DailyForecast[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [hasError, setHasError] = useState(false);
-        
-    useEffect(() => {
-        const fetchDailyForecast = async () => {
-            try {
-                setHasError(false);
-                setIsLoading(true);
-                const result = await getDailyForecast(locationId);
-                setDailyForecast(result);
-            } catch (error) {
-                setHasError(true);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchDailyForecast();
-    }, [locationId]);
-
+export default function Daily({ data }: { data: DailyForecast[] }) {
     return (
-        <div>
-            {isLoading ? <p>Loading...</p> :
-            (
-                dailyForecast.length ? (
+        <Fragment>
+            {
+                data.length ? (
                     <div className="flex flex-col space-y-4">
-                        {dailyForecast.map((day, index) => (
+                        {data.map((day, index) => (
                             <Fragment key={`${index}`}>
                                 <DailyDrawer date={day.Date} timeOfDay="Day" periodData={day.Day} temperature={day.Temperature.Maximum} celestialData={day.Sun} />
                                 <DailyDrawer date={day.Date} timeOfDay="Night" periodData={day.Night} temperature={day.Temperature.Minimum} celestialData={day.Moon} />
                             </Fragment>
                         ))}
                     </div>
-                ) : (
-                    hasError ? <p>Error loading forecast data. Please try again later.</p> : null
-                )
-            )}
-        </div>
+                ) : null
+            }
+        </Fragment>
     );
 }

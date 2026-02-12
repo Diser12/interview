@@ -1,10 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { getHourlyForecast } from "~/api";
 import Hourly from "~/components/forecast/hourly";
 import type { HourlyForecast } from "~/types/forecast";
 
-vi.mock("~/api");
 
 const mockHourlyForecast: HourlyForecast[] = [
   {
@@ -42,29 +40,8 @@ const mockHourlyForecast: HourlyForecast[] = [
 
 
 describe("Hourly Component", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it("should render loading state correctly", () => {
-    vi.mocked(getHourlyForecast).mockImplementation(() => new Promise(() => {}));
-
-    const { container } = render(<Hourly locationId="12345" />);
-    expect(container).toMatchSnapshot();
-  });
-
-  it("should render error state correctly", async () => {
-    vi.mocked(getHourlyForecast).mockRejectedValue(new Error("API Error"));
-
-    const { container } = render(<Hourly locationId="12345" />);
-    await screen.findByText("Error loading forecast data. Please try again later.");
-    expect(container).toMatchSnapshot();
-  });
-
   it("should render hourly forecast data correctly", async () => {
-    vi.mocked(getHourlyForecast).mockResolvedValue(mockHourlyForecast);
-
-    const { container } = render(<Hourly locationId="12345" />);
+    const { container } = render(<Hourly data={mockHourlyForecast} />);
     await screen.findByText("Sunny");
     expect(container).toMatchSnapshot();
   });

@@ -1,10 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Current from "~/components/forecast/current";
-import { getCurrentConditions } from "~/api";
 import type { CurrentConditionsForecast } from "~/types/forecast";
-
-vi.mock("~/api");
 
 const mockCurrentConditions: CurrentConditionsForecast = {
   WeatherIcon: 1,
@@ -33,29 +30,8 @@ const mockCurrentConditions: CurrentConditionsForecast = {
 };
 
 describe("Current Component", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it("should render loading state correctly", () => {
-    vi.mocked(getCurrentConditions).mockImplementation(() => new Promise(() => {}));
-
-    const { container } = render(<Current locationId="12345" />);
-    expect(container).toMatchSnapshot();
-  });
-
-  it("should render error state correctly", async () => {
-    vi.mocked(getCurrentConditions).mockRejectedValue(new Error("API Error"));
-
-    const { container } = render(<Current locationId="12345" />);
-    await screen.findByText("Error loading forecast data. Please try again later.");
-    expect(container).toMatchSnapshot();
-  });
-
   it("should render current conditions data correctly", async () => {
-    vi.mocked(getCurrentConditions).mockResolvedValue(mockCurrentConditions);
-
-    const { container } = render(<Current locationId="12345" />);
+    const { container } = render(<Current data={mockCurrentConditions} />);
     await screen.findByText("Sunny");
     expect(container).toMatchSnapshot();
   });
